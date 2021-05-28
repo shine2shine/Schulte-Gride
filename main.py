@@ -1,7 +1,7 @@
 from  PyQt5 import  QtGui,QtWidgets,QtCore
 import  sys 
 from  Ui_ui import  Ui_MainWindow
-import random, datetime
+import random
 from  Ui_dlg_setting import Ui_Dlg_Setting
 
 from  functools import  partial
