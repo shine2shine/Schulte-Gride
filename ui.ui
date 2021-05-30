@@ -179,6 +179,7 @@
      <string>game</string>
     </property>
     <addaction name="actionsetting"/>
+    <addaction name="actionscore"/>
    </widget>
    <addaction name="menugame"/>
   </widget>
@@ -189,6 +190,11 @@
    </property>
    <property name="text">
     <string>setting</string>
+   </property>
+  </action>
+  <action name="actionscore">
+   <property name="text">
+    <string>score</string>
    </property>
   </action>
  </widget>
