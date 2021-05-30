@@ -98,7 +98,10 @@ class Ui_MainWindow(object):
         self.actionsetting = QtWidgets.QAction(MainWindow)
         self.actionsetting.setEnabled(True)
         self.actionsetting.setObjectName("actionsetting")
+        self.actionscore = QtWidgets.QAction(MainWindow)
+        self.actionscore.setObjectName("actionscore")
         self.menugame.addAction(self.actionsetting)
+        self.menugame.addAction(self.actionscore)
         self.menubar.addAction(self.menugame.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -113,3 +116,4 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "开始"))
         self.menugame.setTitle(_translate("MainWindow", "game"))
         self.actionsetting.setText(_translate("MainWindow", "setting"))
+        self.actionscore.setText(_translate("MainWindow", "score"))
