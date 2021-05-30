@@ -1,10 +1,15 @@
 from  PyQt5 import  QtGui,QtWidgets,QtCore
 import  sys 
 from  Ui_ui import  Ui_MainWindow
-import random
 from  Ui_dlg_setting import Ui_Dlg_Setting
 
+import random
+import os 
+
 from  functools import  partial
+import datetime
+import json 
+
 
 class SettingDlg(QtWidgets.QDialog):
     sigAccepted = QtCore.pyqtSignal(int,int)
@@ -59,6 +64,7 @@ class MyMain(QtWidgets.QMainWindow):
                 self.timer.stop()
                 self.run = False 
                 self.ui.actionsetting.setEnabled(True)
+                self.log()
 
             pass # if self
         
@@ -106,6 +112,15 @@ class MyMain(QtWidgets.QMainWindow):
     def tick(self):
         self.t0 += 0.1
         self.ui.label_time.setText('{:.1f}'.format(self.t0))
+
+    def log(self):
+        t = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        curdir = os.path.split(__file__)[0]
+
+        fn = os.path.join(curdir,'log.log')
+        with open(fn,'a',encoding='utf8') as f:
+            f.write('{},{:.1f}\n'.format(t,self.t0))
+ 
 
                     
     
