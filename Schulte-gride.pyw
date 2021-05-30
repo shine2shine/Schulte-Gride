@@ -2,14 +2,15 @@ from  PyQt5 import  QtGui,QtWidgets,QtCore
 import  sys 
 from  Ui_ui import  Ui_MainWindow
 from  Ui_dlg_setting import Ui_Dlg_Setting
+from Ui_ui_dlg_score import Ui_DialogScore
 
 import random
 import os 
 
 from  functools import  partial
 import datetime
-import json 
-
+import pandas as pd 
+from PandasModel import PandasModel
 
 class SettingDlg(QtWidgets.QDialog):
     sigAccepted = QtCore.pyqtSignal(int,int)
@@ -25,6 +26,15 @@ class SettingDlg(QtWidgets.QDialog):
         cols = self.ui.spinBox_cols.value()
         self.sigAccepted.emit(rows,cols)
         self.accept()
+
+class Score(QtWidgets.QDialog):
+    def __init__(self) -> None:
+        super().__init__()
+        self.ui  = Ui_DialogScore()
+        self.ui.setupUi(self)
+        data = pd.read_csv('log.log')
+        model = PandasModel(data)
+        self.ui.tableView.setModel(model)
 
 
 
@@ -47,8 +57,15 @@ class MyMain(QtWidgets.QMainWindow):
         self.dlg_setting = SettingDlg()
         self.ui.actionsetting.triggered.connect(self.dlg_setting.show)
         self.dlg_setting.sigAccepted.connect(self.setting)
+
+        self.ui.actionscore.triggered.connect(self.show_score)
+
+        
         
 
+    def show_score(self):
+        self.dlg_score = Score()
+        self.dlg_score.show()
 
     def setting(self,rows,cols):
         self.cols = cols
