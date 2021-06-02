@@ -13,7 +13,7 @@ import pandas as pd
 from PandasModel import PandasModel
 
 class SettingDlg(QtWidgets.QDialog):
-    sigAccepted = QtCore.pyqtSignal(int,int)
+    sigSettingChanged = QtCore.pyqtSignal(int,int)
     def __init__(self):
         super().__init__()
         self.ui = Ui_Dlg_Setting()
@@ -24,7 +24,7 @@ class SettingDlg(QtWidgets.QDialog):
         # 
         rows = self.ui.spinBox_rows.value()
         cols = self.ui.spinBox_cols.value()
-        self.sigAccepted.emit(rows,cols)
+        self.sigSettingChanged.emit(rows,cols)
         self.accept()
 
 class Score(QtWidgets.QDialog):
@@ -35,6 +35,7 @@ class Score(QtWidgets.QDialog):
         data = pd.read_csv('log.log')
         model = PandasModel(data)
         self.ui.tableView.setModel(model)
+        self.ui.tableView.resizeColumnsToContents()
 
 
 
@@ -56,7 +57,7 @@ class MyMain(QtWidgets.QMainWindow):
 
         self.dlg_setting = SettingDlg()
         self.ui.actionsetting.triggered.connect(self.dlg_setting.show)
-        self.dlg_setting.sigAccepted.connect(self.setting)
+        self.dlg_setting.sigSettingChanged.connect(self.setting)
 
         self.ui.actionscore.triggered.connect(self.show_score)
 
@@ -136,7 +137,7 @@ class MyMain(QtWidgets.QMainWindow):
 
         fn = os.path.join(curdir,'log.log')
         with open(fn,'a',encoding='utf8') as f:
-            f.write('{},{:.1f}\n'.format(t,self.t0))
+            f.write('{}, {} x {}, {:.1f}\n'.format(t,self.rows,self.cols,self.t0))
  
 
                     
