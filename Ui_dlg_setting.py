@@ -45,6 +45,7 @@ class Ui_Dlg_Setting(object):
         self.spinBox_rows.setFont(font)
         self.spinBox_rows.setMinimum(3)
         self.spinBox_rows.setMaximum(10)
+        self.spinBox_rows.setProperty("value", 5)
         self.spinBox_rows.setObjectName("spinBox_rows")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.spinBox_rows)
         self.label_2 = QtWidgets.QLabel(self.layoutWidget)
@@ -59,6 +60,7 @@ class Ui_Dlg_Setting(object):
         self.spinBox_cols.setFont(font)
         self.spinBox_cols.setMinimum(3)
         self.spinBox_cols.setMaximum(10)
+        self.spinBox_cols.setProperty("value", 5)
         self.spinBox_cols.setObjectName("spinBox_cols")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.spinBox_cols)
 
